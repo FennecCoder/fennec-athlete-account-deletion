@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request deletion of your Fennec Athlete account and associated personal data.">
+    <meta name="theme-color" content="#111827">
+    <title>Fennec Athlete – Account Deletion</title>
+    <style>
+        :root {
+            --color-primary: #D97706;
+            --color-primary-dark: #B45309;
+            --color-dark: #111827;
+            --color-text: #1F2937;
+            --color-text-light: #6B7280;
+            --color-bg: #F3F4F6;
+            --color-card: #FFFFFF;
+            --color-border: #E5E7EB;
+            --color-success: #059669;
+            --color-success-bg: #D1FAE5;
+            --color-error: #DC2626;
+            --color-error-bg: #FEE2E2;
+            --radius: 8px;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --max-width: 680px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .site-header {
+            background-color: var(--color-dark);
+            color: #FFFFFF;
+            padding: 2.5rem 1rem;
+            text-align: center;
+        }
+
+        .site-header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.025em;
+        }
+
+        .site-header p {
+            color: #9CA3AF;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        section {
+            background: var(--color-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-dark);
+        }
+
+        section p {
+            margin-bottom: 1rem;
+        }
+
+        section p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--color-error);
+        }
+
+        .optional {
+            font-weight: 400;
+            color: var(--color-text-light);
+        }
+
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: #FFFFFF;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        button[type="submit"] {
+            display: inline-block;
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--color-primary-dark);
+        }
+
+        button[type="submit"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.4);
+        }
+
+        .form-note {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .feedback {
+            display: none;
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feedback.success {
+            display: block;
+            background-color: var(--color-success-bg);
+            color: var(--color-success);
+            border: 1px solid #A7F3D0;
+        }
+
+        .feedback.error {
+            display: block;
+            background-color: var(--color-error-bg);
+            color: var(--color-error);
+            border: 1px solid #FECACA;
+        }
+
+        .email-display {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 1.05rem;
+            background-color: var(--color-bg);
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius);
+            border: 1px dashed var(--color-border);
+            text-align: center;
+            margin: 0.75rem 0;
+            word-break: break-all;
+            color: var(--color-dark);
+        }
+
+        .copy-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+        }
+
+        .copy-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.3);
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 640px) {
+            .site-header h1 {
+                font-size: 2.25rem;
+            }
+
+            section {
+                padding: 2rem;
+            }
+
+            button[type="submit"] {
+                width: auto;
+                min-width: 240px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Fennec Athlete</h1>
+        <p>Account Deletion</p>
+    </header>
+
+    <main>
+        <section id="request" aria-labelledby="request-heading">
+            <h2 id="request-heading">Delete Your Fennec Athlete Account</h2>
+            <p>You can request deletion of your Fennec Athlete account and all associated personal data. To initiate a deletion request, fill out the form below and click the button. This will open your email client with a pre-filled request.</p>
+
+            <form id="deletion-form" novalidate>
+                <div class="form-group">
+                    <label for="email">
+                        Email address associated with your Fennec Athlete account
+                        <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="your-email@example.com"
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">
+                        Reason for deletion
+                        <span class="optional">(optional)</span>
+                    </label>
+                    <textarea
+                        id="reason"
+                        name="reason"
+                        rows="3"
+                        placeholder="Tell us why you're leaving (optional)..."
+                    ></textarea>
+                </div>
+
+                <button type="submit">Submit Deletion Request</button>
+                <p class="form-note">Clicking this button will open your default email client. No data is sent to a server.</p>
+            </form>
+
+            <div id="form-feedback" class="feedback" role="status" aria-live="polite"></div>
+        </section>
+
+        <section id="alternative" aria-labelledby="alternative-heading">
+            <h2 id="alternative-heading">Alternative Contact Method</h2>
+            <p>If you are unable to use the form above, you can email us directly to request account deletion:</p>
+            <p class="email-display">fennectechn@gmail.com</p>
+            <button class="copy-btn" type="button" onclick="copyEmail()">Copy Email Address</button>
+        </section>
+
+        <section id="data-info" aria-labelledby="data-info-heading">
+            <h2 id="data-info-heading">Data Deletion Information</h2>
+            <p>When your account deletion request is processed, the following information associated with your Fennec Athlete account may be removed:</p>
+            <ul>
+                <li>Your Firebase Authentication account</li>
+                <li>User profile information</li>
+                <li>Training-related personal information</li>
+                <li>Attendance information associated with your account</li>
+                <li>Other personal data associated with your account</li>
+            </ul>
+            <p>We will confirm with you once your account and associated data have been deleted.</p>
+        </section>
+
+        <section id="retention" aria-labelledby="retention-heading">
+            <h2 id="retention-heading">Data Retention</h2>
+            <p>If certain information must be retained for legitimate legal, security, fraud-prevention, accounting, or regulatory reasons, the applicable retention period and reason will be disclosed to you upon request or as required by law.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Fennec Athlete. All rights reserved.</p>
+    </footer>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const SUPPORT_EMAIL = 'fennectechn@gmail.com';
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const yearSpan = document.getElementById('year');
+                if (yearSpan) {
+                    yearSpan.textContent = new Date().getFullYear();
+                }
+
+                const form = document.getElementById('deletion-form');
+                const feedback = document.getElementById('form-feedback');
+
+                if (!form) return;
+
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const emailInput = document.getElementById('email');
+                    const reasonInput = document.getElementById('reason');
+                    const email = emailInput.value.trim();
+                    const reason = reasonInput.value.trim();
+
+                    feedback.style.display = 'none';
+                    feedback.className = 'feedback';
+
+                    if (!email || !isValidEmail(email)) {
+                        showFeedback('Please enter a valid email address associated with your Fennec Athlete account.', 'error');
+                        emailInput.focus();
+                        return;
+                    }
+
+                    const subject = encodeURIComponent('Fennec Athlete Account Deletion Request');
+                    let body = 'Hello,\n\n';
+                    body += 'I would like to request the deletion of my Fennec Athlete account and associated personal data.\n\n';
+                    body += 'Account Email: ' + email + '\n';
+
+                    if (reason) {
+                        body += 'Reason for deletion: ' + reason + '\n';
+                    }
+
+                    body += '\nPlease confirm once my account and all associated data have been deleted.\n\nThank you.';
+
+                    const mailtoLink = 'mailto:' + SUPPORT_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+
+                    window.location.href = mailtoLink;
+
+                    showFeedback(
+                        'Your email client should now open with a pre-filled deletion request. ' +
+                        'If it does not open automatically, please use the email address in the Alternative Contact section below.',
+                        'success'
+                    );
+                });
+
+                function isValidEmail(email) {
+                    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                }
+
+                function showFeedback(message, type) {
+                    feedback.textContent = message;
+                    feedback.className = 'feedback ' + type;
+                    feedback.style.display = 'block';
+                }
+            });
+
+            window.copyEmail = function() {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(SUPPORT_EMAIL).then(function() {
+                        alert('Email address copied: ' + SUPPORT_EMAIL);
+                    }).catch(function() {
+                        fallbackCopy();
+                    });
+                } else {
+                    fallbackCopy();
+                }
+
+                function fallbackCopy() {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = SUPPORT_EMAIL;
+                    textarea.style.position = 'fixed';
+                    textarea.style.left = '-9999px';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+
+                    try {
+                        document.execCommand('copy');
+                        alert('Email address copied: ' + SUPPORT_EMAIL);
+                    } catch (err) {
+                        prompt('Please copy this email address manually:', SUPPORT_EMAIL);
+                    }
+
+                    document.body.removeChild(textarea);
+                }
+            };
+        })();
+    </script>
+</body>
+</html>
